@@ -6,7 +6,7 @@
 /*   By: abicer <abicer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/01 22:00:34 by abicer            #+#    #+#             */
-/*   Updated: 2020/02/04 15:38:28 by abicer           ###   ########.fr       */
+/*   Updated: 2020/02/04 16:33:14 by abicer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,7 @@ int			get_next_line(int fd, char **line)
 	if (BUFFER_SIZE < 0 || line == NULL || fd < 0 || read(fd, *line, 0) < 0)
 		return (-1);
 	if (!str)
-		str = (char*)malloc(5000);
+		str = (char*)malloc(1);
 	while ((ret = read(fd, buf, BUFFER_SIZE)) > 0)
 	{
 		buf[ret] = '\0';
