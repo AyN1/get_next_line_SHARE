@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abicer <abicer@student.42.fr>              +#+  +:+       +#+        */
+/*   By: abicer <abicer@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/01 22:00:34 by abicer            #+#    #+#             */
-/*   Updated: 2020/02/04 16:33:14 by abicer           ###   ########.fr       */
+/*   Updated: 2020/02/04 17:26:03 by abicer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,22 +81,22 @@ static	int	get_line(char **str, char **line)
 int			get_next_line(int fd, char **line)
 {
 	char		buf[BUFFER_SIZE + 1];
-	static char	*str = NULL;
+	static char	*str[OPEN_MAX] = { NULL };
 	char		*temp;
 	size_t		ret;
 
 	if (BUFFER_SIZE < 0 || line == NULL || fd < 0 || read(fd, *line, 0) < 0)
 		return (-1);
-	if (!str)
-		str = (char*)malloc(1);
+	if (!str[fd])
+		str[fd] = (char*)malloc(5000);
 	while ((ret = read(fd, buf, BUFFER_SIZE)) > 0)
 	{
 		buf[ret] = '\0';
-		temp = ft_strjoin(str, buf);
-		free(str);
-		str = temp;
-		if (ft_strchr(str, '\n'))
+		temp = ft_strjoin(str[fd], buf);
+		free(str[fd]);
+		str[fd] = temp;
+		if (ft_strchr(str[fd], '\n'))
 			break ;
 	}
-	return (get_line(&str, line));
+	return (get_line(&str[fd], line));
 }
