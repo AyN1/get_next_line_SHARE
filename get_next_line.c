@@ -69,14 +69,18 @@ static	int	get_line(char **str, char **line)
 int			get_next_line(int fd, char **line)
 {
 	char		buf[BUFFER_SIZE + 1];
-	static char	*str[OPEN_MAX] = { NULL };
+	static char	*str[20000] = { NULL };
 	char		*temp;
 	size_t		ret;
 
 	if (BUFFER_SIZE < 0 || line == NULL || fd < 0 || read(fd, *line, 0) < 0)
 		return (-1);
 	if (!str[fd])
-		str[fd] = (char*)malloc(1);
+	{
+		// str[fd] = (char*)malloc(1);
+		// str[fd][0] = '\0';
+		str[fd] = ft_strdup(""); // Replace both line above by this one
+	}
 	if (!str[fd])
 		return (-1);
 	while ((ret = read(fd, buf, BUFFER_SIZE)) > 0)
