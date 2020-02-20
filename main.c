@@ -1,16 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: abicer <abicer@student.42.fr>              +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/11/29 21:12:13 by abicer            #+#    #+#             */
-/*   Updated: 2020/02/04 15:38:58 by abicer           ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
-#include "get_next_line.h"
 #include <fcntl.h>
 #include <stdio.h>
 
@@ -37,8 +24,9 @@ int	main(int argc, char **argv)
 	// 	++nbr_exec;
 	// }
 
-	while ((ret = get_next_line(fd, &ligne)) >= -1)
+	while (ret >= -1)
 	{
+		ret = get_next_line(fd, &ligne);
 		printf("[%d] ", ret);
 		printf("%s\n", ligne);
 		free(ligne);

@@ -1,16 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   get_next_line.c                                    :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: abicer <abicer@student.s19.be>             +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/12/01 22:00:34 by abicer            #+#    #+#             */
-/*   Updated: 2020/02/04 17:26:03 by abicer           ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
-#include "get_next_line.h"
 #include "limits.h"
 
 char		*ft_strjoin(char const *s1, char const *s2)
@@ -88,7 +75,9 @@ int			get_next_line(int fd, char **line)
 	if (BUFFER_SIZE < 0 || line == NULL || fd < 0 || read(fd, *line, 0) < 0)
 		return (-1);
 	if (!str[fd])
-		str[fd] = (char*)malloc(5000);
+		str[fd] = (char*)malloc(1);
+	if (!str[fd])
+		return (-1);
 	while ((ret = read(fd, buf, BUFFER_SIZE)) > 0)
 	{
 		buf[ret] = '\0';
